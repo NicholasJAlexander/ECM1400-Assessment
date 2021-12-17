@@ -1,0 +1,14 @@
+{
+	"log file path" : "covid_dashboard_log.log",
+	"logging level" : "10",
+	"data handler" : {
+		"location type" : "ltla",
+		"location" : "Exeter",
+		"nation" : "England"
+	},
+	"news handler" : {
+		"news terms" : "Covid COVID-19 coronavirus",
+		"request country" : "gb",
+		"news api key" : "Your api key goes here"
+	}
+}
