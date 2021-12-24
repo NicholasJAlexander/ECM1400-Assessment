@@ -29,6 +29,19 @@ update_dict = {}
 refresh_count = []
 app = Flask(__name__)
 
+# These logger alteration make the log file cleaner
+# sets Flask default logger to level ERROR
+logging.getLogger('werkzeug').setLevel(logging.ERROR)
+# sets urllib3 loggers to level WARNING
+logging.getLogger("urllib3").setLevel(logging.WARNING)
+
+# Configures logger
+logging.basicConfig(
+    filename=config["log file path"],
+    level=int(config["logging level"]),
+    format='[%(asctime)s]:%(module)s,line=%(lineno)d:%(levelname)s:%(message)s',
+    datefmt='%Y-%m-%d %H:%M')
+
 # adding updates to update_dict
 for update in ['covid data','news article']:
     update_dict[f'inital {update} update'] = {
@@ -45,19 +58,6 @@ schedule_news_updates(
     update_name = 'inital news article update',
     update_interval = 0
     )
-
-# These logger alteration make the log file cleaner
-# sets Flask default logger to level ERROR
-logging.getLogger('werkzeug').setLevel(logging.ERROR)
-# sets urllib3 loggers to level WARNING
-logging.getLogger("urllib3").setLevel(logging.WARNING)
-
-# Configures logger
-logging.basicConfig(
-    filename=config["log file path"],
-    level=int(config["logging level"]),
-    format='[%(asctime)s]:%(module)s,line=%(lineno)d:%(levelname)s:%(message)s',
-    datefmt='%Y-%m-%d %H:%M')
 
 def events_logger() -> None:
     """ logs all scheduled events at debug level, one update_name at a time"""
