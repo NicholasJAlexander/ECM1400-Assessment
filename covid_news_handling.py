@@ -73,7 +73,6 @@ def news_API_request(covid_terms: str='Covid COVID-19 coronavirus') -> list[dict
                 )
             # stops the same article being added twice
             if top_headlines['status'] == 'ok':
-                news_articles.clear()
                 for article in top_headlines['articles']:
                     add_article(article)
             elif top_headlines['status'] == 'error':
